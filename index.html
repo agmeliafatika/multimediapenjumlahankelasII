@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pasar Sayur Mini - Belajar Penjumlahan Teknik Menyimpan Kelas 2 SD</title>
+  <meta name="description" content="Website pembelajaran matematika interaktif kelas 2 SD materi penjumlahan bilangan cacah sampai 100 dengan teknik menyimpan melalui Pasar Sayur Mini berbasis gamifikasi.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥕</text></svg>">
+</head>
+<body>
+
+  <!-- Confetti Canvas for Gamification Celebrations -->
+  <canvas id="confettiCanvas" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:9999;"></canvas>
+
+  <!-- ================= TOP NAVIGATION ================= -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo-brand" onclick="switchPage('beranda')">
+        <div class="logo-icon">🥕</div>
+        <div class="logo-text">
+          <h1>Pasar Sayur Mini</h1>
+          <span>Matematika Kelas 2 SD</span>
+        </div>
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li><button class="nav-item-btn active" data-page="beranda">🏠 Beranda</button></li>
+          <li><button class="nav-item-btn" data-page="cptp">🎯 CP & TP</button></li>
+          <li><button class="nav-item-btn" data-page="materi">🥕 Materi Interaktif</button></li>
+          <li><button class="nav-item-btn" data-page="game">🎮 Kasir Pasar</button></li>
+          <li><button class="nav-item-btn" data-page="kuis">📝 Kuis Juara</button></li>
+        </ul>
+      </nav>
+
+      <div class="nav-extras">
+        <div class="user-pill" title="Profil Kamu">
+          <span id="navAvatarIcon">🥕</span>
+          <span id="navStudentName">Sobat Sayur</span>
+          <span style="color:#d97706; margin-left:4px;">| 🪙 <strong id="navCoins">50</strong></span>
+          <span style="color:#ea580c; margin-left:4px;">⭐ <strong id="navStars">3</strong></span>
+        </div>
+
+        <div class="audio-controls">
+          <button id="btnToggleBgm" class="icon-btn muted" title="Nyalakan/Matikan Musik Ceria">🎵</button>
+          <button id="btnToggleSound" class="icon-btn" title="Efek Suara">🔊</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTENT WRAPPER ================= -->
+  <main class="main-wrapper">
+
+    <!-- ================= 1. HALAMAN BERANDA ================= -->
+    <section id="page-beranda" class="page-section active">
+      <!-- Hero Banner -->
+      <div class="hero-card">
+        <div class="hero-content">
+          <div class="hero-tag">🌟 Petualangan Matematika Seru & Menyenangkan</div>
+          <h2 class="hero-title">Ayo Bantu Pak Tani di <span>Pasar Sayur Mini!</span></h2>
+          <p class="hero-desc">
+            Belajar <strong>Penjumlahan Bilangan sampai 100 dengan Teknik Menyimpan</strong> jadi sangat mudah!
+            Kemas wortel segar, simpan keranjang puluhan, layani pelanggan pasar yang lucu, dan jadilah <strong>Juara Bintang Pasar Sayur!</strong>
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="switchPage('materi')">🚀 Mulai Belajar Sekarang</button>
+            <button class="btn-secondary" onclick="switchPage('game')">🎮 Main Game Kasir</button>
+            <button class="tts-btn" onclick="speakText('Selamat datang di Pasar Sayur Mini! Ayo belajar penjumlahan bilangan sampai 100 dengan teknik menyimpan bersama Pak Tani Budi dan Kelinci Cici!')">
+              🔊 Dengarkan Narasi
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-image-box">
+          <img src="assets/pasar_sayur_hero_1792770548145.jpg" 
+               alt="Pasar Sayur Mini" 
+               class="hero-main-img"
+               onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 500 300\'><rect width=\'500\' height=\'300\' fill=\'%23dcfce7\' rx=\'20\'/><text x=\'250\' y=\'110\' font-size=\'70\' text-anchor=\'middle\'>🥕🧺🐰</text><text x=\'250\' y=\'170\' font-family=\'sans-serif\' font-size=\'26\' font-weight=\'bold\' fill=\'%2315803d\' text-anchor=\'middle\'>Pasar Sayur Mini</text><text x=\'250\' y=\'210\' font-family=\'sans-serif\' font-size=\'18\' fill=\'%23166534\' text-anchor=\'middle\'>Pak Tani Budi &amp; Kelinci Cici</text></svg>';">
+          <div class="floating-badge badge-pos-1">
+            <span>🧺</span> 1 Keranjang = 10 Sayur
+          </div>
+          <div class="floating-badge badge-pos-2">
+            <span>⭐</span> Dapatkan Koin & Bintang!
+          </div>
+        </div>
+      </div>
+
+      <!-- Student Profile & Customization Card -->
+      <div class="home-student-card">
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <div style="font-size:2rem; background:#dcfce7; width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center;">👨‍🌾</div>
+          <div>
+            <h4 style="font-family:var(--font-heading); color:#15803d; font-size:1.15rem;">Profil Kasir Cilik</h4>
+            <p style="font-size:0.88rem; color:var(--text-muted);">Masukkan namamu agar tertulis di Sertifikat Juara:</p>
+          </div>
+        </div>
+
+        <div class="student-input-group">
+          <input type="text" id="studentNameInput" placeholder="Ketik Namamu di sini..." maxlength="25">
+          <button class="btn-primary" id="btnSaveName" style="padding:0.6rem 1.2rem; font-size:0.95rem;">Simpan Profil</button>
+        </div>
+
+        <div class="avatar-selector">
+          <span style="font-size:0.85rem; font-weight:700; color:var(--text-muted);">Pilih Topi:</span>
+          <div class="avatar-option selected" data-avatar="🥕" title="Wortel Segar">🥕</div>
+          <div class="avatar-option" data-avatar="🍅" title="Tomat Manis">🍅</div>
+          <div class="avatar-option" data-avatar="🌽" title="Jagung Ceria">🌽</div>
+          <div class="avatar-option" data-avatar="🐰" title="Kelinci Cici">🐰</div>
+        </div>
+      </div>
+
+      <!-- Storyline Banner -->
+      <div class="story-banner" style="margin-bottom:2.5rem;">
+        <img src="assets/mascot_pak_tani_1792770568503.jpg" 
+             alt="Pak Tani Budi" 
+             class="story-avatar"
+             onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%23fed7aa\'/><text x=\'50\' y=\'65\' font-size=\'50\' text-anchor=\'middle\'>👨‍🌾</text></svg>';">
+        <div class="story-text">
+          <h3>Pesan dari Pak Tani Budi & Kelinci Cici:</h3>
+          <p>
+            "Halo teman-teman kelas 2! Di kebun kami, sayuran dipanen melimpah ruah!
+            Jika sayuran satuan sudah terkumpul 10 buah, kita harus mengikatnya rapi ke dalam <strong>1 keranjang puluhan baru</strong>.
+            Itulah rahasia <strong>Teknik Menyimpan</strong>! Ayo kita jelajahi materinya dan bantu kasir melayani pesanan!"
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature Navigation Grid -->
+      <div class="section-header">
+        <div class="badge-tag">🧭 Menu Petualangan Belajar</div>
+        <h3 class="section-title">Pilih Wahana Pembelajaran</h3>
+        <p class="section-subtitle">Semua modul dirancang khusus dengan visual konkret dan suara ramah anak kelas 2 SD.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-box color-blue" onclick="switchPage('cptp')">
+          <div class="feature-icon-circle">🎯</div>
+          <h3>CP & Tujuan Belajar</h3>
+          <p>Pelajari target capaian Kurikulum Merdeka dan pedoman belajar mandiri yang jelas.</p>
+        </div>
+
+        <div class="feature-box color-orange" onclick="switchPage('materi')">
+          <div class="feature-icon-circle">🥕</div>
+          <h3>Materi Interaktif</h3>
+          <p>Animasi manipulatif sayuran, pemahaman nilai tempat, dan lab simulasi menyimpan.</p>
+        </div>
+
+        <div class="feature-box color-purple" onclick="switchPage('game')">
+          <div class="feature-icon-circle">🎮</div>
+          <h3>Game Kasir Pasar</h3>
+          <p>Mainkan 3 level tantangan berbelanja sayur, kemas satuan jadi puluhan, dan kumpulkan koin!</p>
+        </div>
+
+        <div class="feature-box color-gold" onclick="switchPage('kuis')">
+          <div class="feature-icon-circle">🏆</div>
+          <h3>Kuis & Sertifikat</h3>
+          <p>Uji kemampuanmu lewat 10 tantangan seru dan dapatkan Sertifikat Juara Resmi berhias bintang!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 2. HALAMAN CP & TP ================= -->
+    <section id="page-cptp" class="page-section">
+      <div class="section-header">
+        <div class="badge-tag">📘 Kurikulum Merdeka - Fase A (Kelas 2 SD)</div>
+        <h2 class="section-title">Capaian & Tujuan Pembelajaran</h2>
+        <p class="section-subtitle">
+          Pedoman panduan belajar resmi mata pelajaran Matematika Elemen Bilangan untuk guru, siswa, dan orang tua.
+        </p>
+      </div>
+
+      <div class="curriculum-grid">
+        <!-- Capaian Pembelajaran -->
+        <div class="curriculum-card cp-card">
+          <span class="card-tag green">Capaian Pembelajaran (CP)</span>
+          <h3>Elemen Bilangan - Fase A</h3>
+          <p style="margin-bottom:1rem; color:#334155; font-size:0.98rem; line-height:1.6;">
+            Pada akhir Fase A, peserta didik menunjukkan pemahaman dan memiliki intuisi bilangan (number sense) pada bilangan cacah sampai 100. Peserta didik dapat:
+          </p>
+          <ul class="curriculum-list">
+            <li>
+              <span class="check-icon">✓</span>
+              <span>Membaca, menulis, dan menentukan <strong>nilai tempat</strong> (puluhan dan satuan) bilangan cacah sampai 100.</span>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <span>Melakukan operasi <strong>penjumlahan dua bilangan cacah</strong> sampai 100 dengan dan tanpa teknik menyimpan.</span>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <span>Menggunakan benda konkret, gambar manipulatif, serta simbol matematika untuk menyelesaikan masalah kontekstual sehari-hari.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Tujuan Pembelajaran -->
+        <div class="curriculum-card tp-card">
+          <span class="card-tag orange">Tujuan Pembelajaran (TP)</span>
+          <h3>Target Khusus Pembelajaran</h3>
+          <p style="margin-bottom:1rem; color:#334155; font-size:0.98rem; line-height:1.6;">
+            Melalui konteks "Pasar Sayur Mini", setelah mengikuti aktivitas gamifikasi ini, peserta didik diharapkan mampu:
+          </p>
+          <ul class="curriculum-list">
+            <li>
+              <span class="check-icon">✓</span>
+              <span><strong>TP 1:</strong> Memodelkan bilangan dua angka menjadi kumpulan keranjang puluhan dan sayur satuan secara tepat.</span>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <span><strong>TP 2:</strong> Mengonstruksi pemahaman konsep teknik menyimpan bahwa <strong>10 sayur satuan harus dikelompokkan menjadi 1 puluhan</strong>.</span>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <span><strong>TP 3:</strong> Menghitung hasil penjumlahan bilangan cacah sampai 100 dengan teknik menyimpan menggunakan cara bersusun panjang dan bersusun pendek secara mandiri.</span>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <span><strong>TP 4:</strong> Menyelesaikan persoalan cerita transaksi di pasar sayur dengan penalaran kritis dan tepat.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Profil Pelajar Pancasila -->
+      <div class="pancasila-card">
+        <h3 style="font-family:var(--font-heading); color:#15803d; font-size:1.35rem; display:flex; align-items:center; gap:0.5rem;">
+          <span>🇮🇩</span> Penguatan Profil Pelajar Pancasila
+        </h3>
+        <p style="font-size:0.95rem; color:var(--text-muted); margin-top:0.3rem;">
+          Karakter luhur yang dikembangkan selama proses pembelajaran dengan media ini:
+        </p>
+
+        <div class="pancasila-grid">
+          <div class="pancasila-item">
+            <div class="emoji">🧠</div>
+            <h4>Bernalar Kritis</h4>
+            <p>Menganalisis mengapa satuan yang berjumlah 10 atau lebih harus dikonversi menjadi 1 puluhan baru.</p>
+          </div>
+          <div class="pancasila-item">
+            <div class="emoji">🌟</div>
+            <h4>Mandiri</h4>
+            <p>Berani mencoba simulasi, menghitung hasil belanja kasir, serta menyelesaikan kuis evaluasi sendiri.</p>
+          </div>
+          <div class="pancasila-item">
+            <div class="emoji">🤝</div>
+            <h4>Gotong Royong</h4>
+            <p>Membantu Pak Tani dan rekan belajar dalam melayani pembeli sayur dengan ramah dan jujur.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Petunjuk Belajar -->
+      <div class="card" style="background:#fffbeb; border-color:#fde047;">
+        <h4 style="font-family:var(--font-heading); color:#854d0e; font-size:1.2rem; margin-bottom:0.75rem;">
+          💡 Petunjuk Penggunaan bagi Guru & Orang Tua
+        </h4>
+        <ol style="margin-left:1.5rem; color:#713f12; font-size:0.95rem; display:flex; flex-direction:column; gap:0.5rem;">
+          <li>Ajak siswa membuka menu <strong>Materi Interaktif</strong> untuk mencoba simulasi pengikatan 10 sayuran menjadi keranjang puluhan.</li>
+          <li>Gunakan tombol <strong>🔊 Dengarkan</strong> agar siswa yang masih dalam tahap membaca permulaan dapat mendengarkan penjelasan audio.</li>
+          <li>Bimbing siswa bermain di <strong>Game Kasir Pasar</strong> secara bertahap dari Level 1 hingga Level 3.</li>
+          <li>Akhiri kegiatan dengan mengerjakan <strong>Kuis Juara</strong> untuk mencetak Sertifikat Penghargaan resmi bagi siswa!</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= 3. HALAMAN MATERI INTERAKTIF ================= -->
+    <section id="page-materi" class="page-section">
+      <div class="section-header">
+        <div class="badge-tag">🔬 Laboratorium Sayur & Konsep Matematika</div>
+        <h2 class="section-title">Materi Penjumlahan Teknik Menyimpan</h2>
+        <p class="section-subtitle">
+          Yuk pelajari rahasia penjumlahan menyimpan dengan melihat langsung perubahan wortel satuan menjadi keranjang puluhan!
+        </p>
+      </div>
+
+      <!-- Sub-Tabs Navigation -->
+      <div class="materi-tabs">
+        <button class="materi-tab-btn active" data-tab="konsep" onclick="switchMateriTab('konsep')">1. Nilai Tempat Sayuran 🧺</button>
+        <button class="materi-tab-btn" data-tab="rahasia" onclick="switchMateriTab('rahasia')">2. Mengapa Menyimpan? 🤔</button>
+        <button class="materi-tab-btn" data-tab="simulasi" onclick="switchMateriTab('simulasi')">3. Lab Simulasi Interaktif 🧪</button>
+        <button class="materi-tab-btn" data-tab="bersusun" onclick="switchMateriTab('bersusun')">4. Cara Bersusun Pendek & Panjang 📝</button>
+      </div>
+
+      <!-- TAB 1: Nilai Tempat Sayuran -->
+      <div id="tab-content-konsep" class="materi-subtab-content">
+        <div class="materi-content-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;">
+            <h3 style="font-family:var(--font-heading); color:#166534; font-size:1.5rem;">
+              Tahap 1: Mengenal Puluhan dan Satuan di Pasar
+            </h3>
+            <button class="tts-btn" onclick="speakText('Di pasar sayur, kita mengelompokkan sayur menjadi puluhan dan satuan. Satu wortel lepas disebut satu satuan. Jika sepuluh wortel dikumpulkan ke dalam satu keranjang, itu disebut satu puluhan!')">
+              🔊 Baca untukku
+            </button>
+          </div>
+
+          <p style="color:#334155; font-size:1.05rem;">
+            Agar Pak Tani tidak repot menghitung sayuran satu per satu, Pak Tani mengemasnya dengan aturan pintar:
+          </p>
+
+          <div class="concept-display-grid">
+            <div class="basket-box">
+              <span class="col-tag tag-ones">SATUAN</span>
+              <h4 style="font-family:var(--font-heading); font-size:1.25rem; margin-top:0.5rem;">1 Sayur Lepas = 1 Satuan</h4>
+              <div class="basket-visual">
+                <span class="carrot-icon">🥕</span>
+              </div>
+              <p style="font-size:0.92rem; color:#475569;">
+                Sayuran yang berdiri sendiri bernilai <strong>1 satuan</strong>. Jika ada 7 wortel lepas, nilainya adalah 7.
+              </p>
+            </div>
+
+            <div class="basket-box tens">
+              <span class="col-tag tag-tens">PULUHAN</span>
+              <h4 style="font-family:var(--font-heading); font-size:1.25rem; margin-top:0.5rem;">1 Keranjang Sayur = 1 Puluhan (10)</h4>
+              <div class="basket-visual">
+                <div class="tens-crate">
+                  <span style="font-size:1.8rem;">🧺</span>
+                  <span>Isi 10 Wortel</span>
+                </div>
+              </div>
+              <p style="font-size:0.92rem; color:#475569;">
+                Setiap <strong>10 sayur lepas</strong> dimasukkan ke dalam 1 keranjang rapi, bernilai <strong>1 puluhan = 10</strong>.
+              </p>
+            </div>
+          </div>
+
+          <div class="card" style="background:#f0fdf4; border:2px solid #86efac; text-align:center;">
+            <p style="font-size:1.15rem; font-family:var(--font-heading); color:#15803d;">
+              Contoh Bilangan <strong>24</strong> = 🧺🧺 (2 Keranjang Puluhan = 20) + 🥕🥕🥕🥕 (4 Wortel Satuan = 4).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: Mengapa Menyimpan? -->
+      <div id="tab-content-rahasia" class="materi-subtab-content" style="display:none;">
+        <div class="materi-content-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;">
+            <h3 style="font-family:var(--font-heading); color:#166534; font-size:1.5rem;">
+              Tahap 2: Rahasia Mengapa Kita Harus Menyimpan
+            </h3>
+            <button class="tts-btn" onclick="speakText('Mengapa kita harus menyimpan? Karena rak satuan di pasar hanya muat angka 0 sampai 9. Jika satuan terkumpul 10 atau lebih, sepuluh sayur itu diikat menjadi satu keranjang puluhan baru, lalu ditaruh ke rak puluhan!')">
+              🔊 Baca untukku
+            </button>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:1.5rem;">
+            <div style="background:#fef2f2; border:2px solid #fecaca; padding:1.5rem; border-radius:var(--radius-md);">
+              <h4 style="font-family:var(--font-heading); color:#991b1b; font-size:1.2rem; margin-bottom:0.5rem;">
+                ⚠️ Aturan Penting Rak Satuan:
+              </h4>
+              <p style="font-size:0.98rem; color:#7f1d1d; line-height:1.6;">
+                Rak satuan hanya muat maksimal <strong>angka 9</strong>!
+                Tidak boleh menuliskan dua angka sekaligus di kolom satuan (misal angka 12 tidak boleh ditulis sekaligus di bawah satuan).
+              </p>
+              <div style="font-size:2rem; margin-top:0.75rem; text-align:center;">📦 🥕🥕🥕🥕🥕🥕🥕🥕🥕 (Maksimal 9)</div>
+            </div>
+
+            <div style="background:#ecfdf5; border:2px solid #a7f3d0; padding:1.5rem; border-radius:var(--radius-md);">
+              <h4 style="font-family:var(--font-heading); color:#065f46; font-size:1.2rem; margin-bottom:0.5rem;">
+                ✨ Solusi Cerdas: Teknik Menyimpan!
+              </h4>
+              <p style="font-size:0.98rem; color:#047857; line-height:1.6;">
+                Jika satuan dijumlahkan hasilnya <strong>12</strong>:
+                <br>• Ambil <strong>10 sayur</strong> ➔ Ikat jadi <strong>1 keranjang puluhan</strong>, taruh (simpan) di kolom puluhan!
+                <br>• Sisa <strong>2 sayur</strong> tetap tinggal di kolom satuan.
+              </p>
+              <div style="font-size:1.5rem; margin-top:0.75rem; text-align:center; font-family:var(--font-heading); color:#047857;">
+                12 = 1 Puluhan (Disimpan) + 2 Satuan (Ditulis)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: Lab Simulasi Interaktif -->
+      <div id="tab-content-simulasi" class="materi-subtab-content" style="display:none;">
+        <div class="materi-content-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;">
+            <h3 style="font-family:var(--font-heading); color:#166534; font-size:1.5rem;">
+              Tahap 3: Lab Simulasi Tangan Langsung (Hands-on)
+            </h3>
+            <button class="tts-btn" onclick="speakText('Di lab simulasi ini, kamu bisa mengubah bilangan sesukamu. Klik tombol ikat puluhan untuk melihat sepuluh wortel bersatu menjadi satu keranjang baru!')">
+              🔊 Baca untukku
+            </button>
+          </div>
+
+          <p style="color:#334155;">Pilih atau ubah dua bilangan di bawah ini untuk melihat keajaiban teknik menyimpan:</p>
+
+          <div class="sim-container">
+            <div class="sim-controls">
+              <div class="sim-picker">
+                <span>Bilangan 1:</span>
+                <input type="number" id="simNum1" class="sim-input" min="11" max="65" value="27" onchange="updateSimNumbers()">
+              </div>
+              <span style="font-size:1.8rem; font-weight:700; color:#166534;">+</span>
+              <div class="sim-picker">
+                <span>Bilangan 2:</span>
+                <input type="number" id="simNum2" class="sim-input" min="11" max="30" value="15" onchange="updateSimNumbers()">
+              </div>
+              <button class="btn-primary" onclick="updateSimNumbers()" style="padding:0.6rem 1.2rem; font-size:0.95rem;">
+                🔄 Perbarui Angka
+              </button>
+            </div>
+
+            <div class="sim-board">
+              <!-- Kolom Puluhan -->
+              <div class="board-col col-tens">
+                <div class="board-col-header">
+                  <h4 style="color:#15803d;">🧺 RAK PULUHAN</h4>
+                  <span class="col-tag tag-tens">Keranjang (10-an)</span>
+                </div>
+                <div id="simStoredSlot" class="stored-ten-slot">
+                  <span>Slot Simpanan (Kosong)</span>
+                </div>
+                <div id="simTensItems" class="board-items-area">
+                  <!-- Filled via JS -->
+                </div>
+              </div>
+
+              <!-- Kolom Satuan -->
+              <div class="board-col col-ones">
+                <div class="board-col-header">
+                  <h4 style="color:#c2410c;">🥕 RAK SATUAN</h4>
+                  <span class="col-tag tag-ones">Sayur Satuan (1-an)</span>
+                </div>
+                <div style="min-height:44px; display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:0.85rem; font-weight:700;">
+                  (Maksimal Muat 9 Sayur)
+                </div>
+                <div id="simOnesItems" class="board-items-area">
+                  <!-- Filled via JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Banner & Step Explanation -->
+            <div class="sim-action-banner">
+              <div id="simStepText" class="sim-step-text">
+                Langkah 1: Menghitung sayur satuan terlebih dahulu...
+              </div>
+              <div class="sim-steps-btn-group">
+                <button id="simActionBtn" class="btn-primary" style="font-size:1rem; padding:0.65rem 1.4rem;">
+                  Lanjut ➡️
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: Bersusun Pendek & Panjang -->
+      <div id="tab-content-bersusun" class="materi-subtab-content" style="display:none;">
+        <div class="materi-content-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;">
+            <h3 style="font-family:var(--font-heading); color:#166534; font-size:1.5rem;">
+              Tahap 4: Menuliskan dalam Cara Bersusun
+            </h3>
+            <button class="tts-btn" onclick="speakText('Cara bersusun pendek adalah cara tercepat. Jumlahkan satuan dulu: 7 tambah 5 sama dengan 12. Tulis 2 di satuan, dan simpan 1 kecil di atas kolom puluhan. Lalu jumlahkan puluhannya: 1 tambah 2 tambah 1 sama dengan 4. Hasilnya 42!')">
+              🔊 Baca untukku
+            </button>
+          </div>
+
+          <p style="color:#334155; font-size:1.05rem;">
+            Mari kita pelajari contoh soal: <strong>27 + 15 = ...</strong> dengan dua cara penulisan standar:
+          </p>
+
+          <div class="math-stand-grid">
+            <!-- Bersusun Pendek -->
+            <div class="math-stand-box" style="border-color:#86efac; background:#f0fdf4;">
+              <span class="card-tag green">Metode Praktis</span>
+              <h4 style="font-family:var(--font-heading); font-size:1.25rem; color:#15803d; margin-top:0.4rem;">
+                Cara Bersusun Pendek
+              </h4>
+
+              <table class="bersusun-table">
+                <tr class="simpanan-row">
+                  <td title="Simpanan puluhan">¹</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>7</td>
+                </tr>
+                <tr class="line-row">
+                  <td>1</td>
+                  <td>5</td>
+                </tr>
+                <tr class="result-row">
+                  <td>4</td>
+                  <td>2</td>
+                </tr>
+              </table>
+
+              <div style="background:white; padding:1rem; border-radius:var(--radius-sm); border:1px solid #bbf7d0; font-size:0.92rem; color:#334155;">
+                <strong>Langkah Pengerjaan:</strong>
+                <ol style="margin-left:1.2rem; margin-top:0.4rem;">
+                  <li><strong>Satuan:</strong> 7 + 5 = 12. Tulis <strong>2</strong> di bawah satuan, simpan <strong>1</strong> di atas puluhan.</li>
+                  <li><strong>Puluhan:</strong> 1 (simpanan) + 2 + 1 = <strong>4</strong>. Tulis <strong>4</strong> di bawah puluhan.</li>
+                  <li>Hasil akhir adalah <strong>42</strong>.</li>
+                </ol>
+              </div>
+            </div>
+
+            <!-- Bersusun Panjang -->
+            <div class="math-stand-box" style="border-color:#fed7aa; background:#fff7ed;">
+              <span class="card-tag orange">Metode Konsep Nilai Tempat</span>
+              <h4 style="font-family:var(--font-heading); font-size:1.25rem; color:#c2410c; margin-top:0.4rem;">
+                Cara Bersusun Panjang
+              </h4>
+
+              <div style="font-family:var(--font-heading); font-size:1.2rem; margin:1.2rem 0; line-height:1.8; color:#1e293b; background:white; padding:1rem; border-radius:var(--radius-sm); border:1px solid #fdba74;">
+                <div>27 = 20 + 7</div>
+                <div>15 = 10 + 5</div>
+                <div style="border-bottom:3px solid #1e293b; margin-bottom:0.4rem;">──────────────── (+)</div>
+                <div style="color:#c2410c;">&nbsp;&nbsp;&nbsp;&nbsp;= 30 + 12</div>
+                <div style="color:#0284c7;">&nbsp;&nbsp;&nbsp;&nbsp;= 30 + (10 + 2)</div>
+                <div style="color:#15803d; font-weight:700;">&nbsp;&nbsp;&nbsp;&nbsp;= (30 + 10) + 2 = 40 + 2 = 42</div>
+              </div>
+
+              <div style="background:white; padding:1rem; border-radius:var(--radius-sm); border:1px solid #fed7aa; font-size:0.92rem; color:#334155;">
+                <strong>Keuntungan Cara Panjang:</strong>
+                <p style="margin-top:0.4rem;">
+                  Siswa melihat dengan sangat jelas bahwa angka 12 dipecah menjadi <strong>10 (puluhan) + 2 (satuan)</strong>, lalu 10 bergabung dengan 30 menjadi 40.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 4. HALAMAN GAME PASAR SAYUR MINI ================= -->
+    <section id="page-game" class="page-section">
+      <div class="section-header">
+        <div class="badge-tag">🎮 Simulasi Permainan Interaktif</div>
+        <h2 class="section-title">Kasir Pasar Sayur Mini</h2>
+        <p class="section-subtitle">
+          Bantu Pak Tani melayani pesanan pembeli! Kemas 10 sayur satuan menjadi 1 keranjang puluhan baru dan hitung total harganya!
+        </p>
+      </div>
+
+      <div class="game-container">
+        <!-- Game Top Status Bar -->
+        <div class="game-top-bar">
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <span style="font-size:1.8rem;">🏪</span>
+            <div>
+              <div style="font-family:var(--font-heading); font-size:1.15rem; font-weight:700;">Meja Kasir Pasar Sayur</div>
+              <div style="font-size:0.82rem; opacity:0.9;">Toko Sayur Ceria Pak Tani</div>
+            </div>
+          </div>
+
+          <!-- Difficulty Level Selector -->
+          <div class="level-selector-pills">
+            <span style="font-size:0.85rem; font-weight:700; display:flex; align-items:center; margin-right:4px;">Level Misi:</span>
+            <button class="level-pill-btn active" data-level="1" onclick="setGameLevel(1)">1: Pesanan Ringan</button>
+            <button class="level-pill-btn" data-level="2" onclick="setGameLevel(2)">2: Pesanan Warung</button>
+            <button class="level-pill-btn" data-level="3" onclick="setGameLevel(3)">3: Pesta Sayur</button>
+          </div>
+
+          <div style="display:flex; gap:0.5rem;">
+            <div class="game-stat-item gold">
+              <span>🪙</span> Koin: <span id="gameSessionCoins">25/order</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-play-area">
+          <!-- Customer Dialogue Box -->
+          <div class="customer-box">
+            <div id="customerAvatarEmoji" style="font-size:3.5rem; background:#fed7aa; width:80px; height:80px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:3px solid #f97316;">
+              🐰
+            </div>
+            <div class="customer-bubble">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.4rem;">
+                <strong id="customerName" style="font-family:var(--font-heading); font-size:1.25rem; color:#15803d;">Bu Kelinci</strong>
+                <div style="display:flex; gap:0.4rem;">
+                  <button class="btn-secondary" style="padding:0.35rem 0.85rem; font-size:0.85rem; background:#fef9c3; border-color:#eab308; color:#854d0e;" onclick="showGameHint()">
+                    💡 Bantuan Kelinci Cici
+                  </button>
+                  <button class="tts-btn" onclick="speakText(document.getElementById('customerSpeech').textContent)">
+                    🔊 Baca Pesanan
+                  </button>
+                </div>
+              </div>
+              <p id="customerSpeech" style="font-size:1.05rem; color:#334155; margin-top:0.3rem;">
+                "Halo! Saya ingin membeli 15 wortel dan 7 wortel lagi untuk keluarga kelinci!"
+              </p>
+              <div id="customerOrderMath" class="customer-order-math">15 + 7 = ?</div>
+            </div>
+          </div>
+
+          <!-- Helper Hint Box (Pops up when clicking hint) -->
+          <div id="gameHintBox" class="game-hint-bubble">
+            <div style="font-size:2rem;">🐰</div>
+            <div style="flex:1;">
+              <strong style="color:#854d0e; font-family:var(--font-heading);">Petunjuk dari Kelinci Cici:</strong>
+              <div id="gameHintText" style="font-size:0.95rem; color:#713f12; margin-top:0.2rem;">
+                Yuk hitung satuannya dulu! 5 + 7 = 12 sayur. Karena ada 10, kita ikat jadi 1 keranjang simpanan di puluhan, sisa 2 di satuan!
+              </div>
+            </div>
+          </div>
+
+          <!-- Cashier Work Desk -->
+          <div class="cashier-desk">
+            <div class="cashier-shelves-grid">
+              <!-- Rak Puluhan -->
+              <div class="shelf-column">
+                <div class="shelf-title">
+                  <span style="color:#15803d;">🧺 RAK KERANJANG PULUHAN (10)</span>
+                  <span class="col-tag tag-tens">Puluhan</span>
+                </div>
+
+                <!-- Slot Simpanan Game -->
+                <div style="margin-bottom:0.75rem;">
+                  <div style="font-size:0.82rem; font-weight:700; color:#b45309; margin-bottom:2px;">Tempat Simpanan (+1 Puluhan):</div>
+                  <div id="gameSimpananSlot" class="stored-ten-slot">
+                    <em>Belum ada simpanan</em>
+                  </div>
+                </div>
+
+                <div class="shelf-row-box">
+                  <div class="shelf-row-label">Sayur Pertama: <span id="shelfLabel1" style="color:#15803d; font-weight:700;">10</span></div>
+                  <div id="shelfTensRow1" class="shelf-items-flex"></div>
+                </div>
+
+                <div class="shelf-row-box">
+                  <div class="shelf-row-label">Sayur Kedua: <span id="shelfLabel2" style="color:#15803d; font-weight:700;">0</span></div>
+                  <div id="shelfTensRow2" class="shelf-items-flex"></div>
+                </div>
+              </div>
+
+              <!-- Rak Satuan -->
+              <div class="shelf-column">
+                <div class="shelf-title">
+                  <span style="color:#c2410c;">🥕 RAK SAYUR SATUAN (1)</span>
+                  <span class="col-tag tag-ones">Satuan</span>
+                </div>
+
+                <div style="min-height:36px; display:flex; align-items:center; justify-content:center; color:#c2410c; font-size:0.88rem; font-weight:700;" id="shelfSatuanSummary">
+                  Total Satuan: 5 + 7 = 12 sayur
+                </div>
+
+                <div class="shelf-row-box">
+                  <div class="shelf-row-label">Sayur Pertama:</div>
+                  <div id="shelfOnesRow1" class="shelf-items-flex"></div>
+                </div>
+
+                <div class="shelf-row-box">
+                  <div class="shelf-row-label">Sayur Kedua:</div>
+                  <div id="shelfOnesRow2" class="shelf-items-flex"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interaktif Bundling / Simpan Button (Langkah 1) -->
+            <div class="regroup-action-bar">
+              <div class="game-step-indicator">👉 Langkah 1 dari 2</div>
+              <p style="font-size:1.05rem; color:#854d0e; margin:0.4rem 0 0.8rem; font-weight:700;" id="bundleInstructionText">
+                Ada lebih dari 9 sayur satuan! Klik tombol di bawah untuk mengikat 10 sayur jadi 1 keranjang puluhan:
+              </p>
+              <button id="btnBundleVeggies" class="btn-bundle pulsing" onclick="bundleGameVeggies()">
+                🧺 Klik: Ikat 10 Sayur Jadi 1 Keranjang Puluhan (Simpan!)
+              </button>
+            </div>
+
+            <!-- PILIHAN KARTU JAWABAN CEPAT (Langkah 2 - Sangat Mudah Untuk Anak Kelas 2) -->
+            <div id="gameChoicesSection" style="margin-top:1.5rem; text-align:center;">
+              <div class="game-step-indicator" style="background:#ffedd5; color:#c2410c;">👉 Langkah 2 dari 2</div>
+              <h4 style="font-family:var(--font-heading); font-size:1.25rem; color:#1e293b; margin:0.4rem 0 0.6rem;">
+                Berapa total seluruh sayur pesanan pembeli? Klik kartu jawaban:
+              </h4>
+              
+              <div id="gameAnswerCards" class="game-cards-grid">
+                <!-- Dynamically populated with 3 kid-friendly answer cards -->
+              </div>
+            </div>
+
+            <!-- Alternatif Input Manual (Opsional) -->
+            <details style="margin-top:1.25rem; text-align:center; color:var(--text-muted); font-size:0.9rem;">
+              <summary style="cursor:pointer; font-weight:700; color:#166534; padding:0.4rem;">
+                ⌨️ Ingin Mengetik Angka Puluhan &amp; Satuan Sendiri? (Klik di sini)
+              </summary>
+              <div class="answer-input-board" style="margin-top:0.75rem;">
+                <div class="input-place-box">
+                  <label>PULUHAN</label>
+                  <input type="number" id="gameTensInput" class="game-number-input" placeholder="0" min="0" max="9">
+                </div>
+                <div class="input-place-box">
+                  <label>SATUAN</label>
+                  <input type="number" id="gameOnesInput" class="game-number-input" placeholder="0" min="0" max="9">
+                </div>
+                <button class="btn-primary" onclick="checkGameAnswer()" style="padding:0.8rem 1.6rem; font-size:1.05rem;">
+                  ✅ Periksa Pesanan
+                </button>
+              </div>
+            </details>
+
+            <!-- Feedback Banner -->
+            <div id="gameFeedback" class="game-feedback-banner"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 5. HALAMAN KUIS & EVALUASI ================= -->
+    <section id="page-kuis" class="page-section">
+      <div class="section-header">
+        <div class="badge-tag">📝 Evaluasi & Prestasi Juara</div>
+        <h2 class="section-title">Kuis Tantangan Juara Pasar</h2>
+        <p class="section-subtitle">
+          Jawab 10 soal cerita dan tantangan berhitung untuk mendapatkan Sertifikat Bintang Matematika Pasar Sayur Mini!
+        </p>
+      </div>
+
+      <!-- 1. Quiz Participant Registration Card (Start Gate) -->
+      <div id="quizStartCard" class="quiz-start-card">
+        <div class="quiz-start-badge">📋 Data Diri Peserta Kuis</div>
+        <h3 class="quiz-start-title">Siap Menjadi Juara Pasar Sayur? 🥕🏆</h3>
+        <p class="quiz-start-desc">
+          Sebelum memulai 10 soal tantangan penjumlahan teknik menyimpan, tuliskan nama lengkap dan kelasmu ya!
+          Namamu akan tercetak resmi di <strong>Sertifikat Juara Bintang Pasar Sayur</strong>!
+        </p>
+
+        <div class="quiz-form-box">
+          <div class="quiz-form-group">
+            <label for="quizStudentNameInput">👤 Nama Lengkap Peserta / Siswa:</label>
+            <input type="text" id="quizStudentNameInput" placeholder="Ketik nama lengkapmu di sini..." maxlength="30" autocomplete="name">
+          </div>
+
+          <div class="quiz-form-row">
+            <div class="quiz-form-group">
+              <label for="quizStudentClassInput">🏫 Kelas / No. Absen:</label>
+              <input type="text" id="quizStudentClassInput" placeholder="Contoh: Kelas 2-A / No. 15" maxlength="25">
+            </div>
+            <div class="quiz-form-group">
+              <label for="quizStudentSchoolInput">🏫 Nama Sekolah (Opsional):</label>
+              <input type="text" id="quizStudentSchoolInput" placeholder="Contoh: SD Negeri 1 Ceria" maxlength="35">
+            </div>
+          </div>
+
+          <div class="quiz-avatar-select-bar">
+            <span>Pilih Maskot Kuis:</span>
+            <div class="avatar-option selected" data-quiz-avatar="🥕" title="Wortel Juara">🥕</div>
+            <div class="avatar-option" data-quiz-avatar="🍅" title="Tomat Semangat">🍅</div>
+            <div class="avatar-option" data-quiz-avatar="🌽" title="Jagung Ceria">🌽</div>
+            <div class="avatar-option" data-quiz-avatar="🐰" title="Kelinci Pintar">🐰</div>
+            <div class="avatar-option" data-quiz-avatar="👨‍🌾" title="Pak Tani Cilik">👨‍🌾</div>
+          </div>
+
+          <!-- Pilihan Variasi Kategori Soal -->
+          <div class="quiz-category-select-bar">
+            <span style="font-family:var(--font-heading); font-weight:700; color:#1e293b; font-size:1rem; display:block;">
+              🎯 Pilih Variasi Jenis Soal:
+            </span>
+            <div class="quiz-category-pills">
+              <button type="button" class="quiz-cat-pill active" data-cat="all" onclick="selectQuizCategory('all')">
+                🌟 Semua Variasi (Campuran)
+              </button>
+              <button type="button" class="quiz-cat-pill" data-cat="visual" onclick="selectQuizCategory('visual')">
+                🧺 Gambar Keranjang &amp; Sayur
+              </button>
+              <button type="button" class="quiz-cat-pill" data-cat="cerita" onclick="selectQuizCategory('cerita')">
+                📖 Soal Cerita Pasar
+              </button>
+              <button type="button" class="quiz-cat-pill" data-cat="simpanan" onclick="selectQuizCategory('simpanan')">
+                🔢 Tebak Angka Simpanan
+              </button>
+              <button type="button" class="quiz-cat-pill" data-cat="bersusun" onclick="selectQuizCategory('bersusun')">
+                📝 Hitung Bersusun
+              </button>
+            </div>
+          </div>
+
+          <!-- Pilihan Jumlah Soal -->
+          <div class="quiz-length-select-bar">
+            <span style="font-family:var(--font-heading); font-weight:700; color:#1e293b; font-size:1rem; display:block;">
+              ⏱️ Pilih Jumlah Soal:
+            </span>
+            <div class="quiz-length-pills">
+              <button type="button" class="quiz-len-pill" data-len="5" onclick="selectQuizLength(5)">5 Soal (Kilat Ceria ⚡)</button>
+              <button type="button" class="quiz-len-pill active" data-len="10" onclick="selectQuizLength(10)">10 Soal (Standar Juara 🌟)</button>
+              <button type="button" class="quiz-len-pill" data-len="15" onclick="selectQuizLength(15)">15 Soal (Tantangan Bintang 👑)</button>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:center; gap:1rem; margin-top:1.5rem; flex-wrap:wrap;">
+            <button class="btn-primary" id="btnStartQuiz" onclick="startQuizWithParticipant()" style="font-size:1.15rem; padding:0.9rem 2.2rem;">
+              🚀 Mulai Kerjakan Kuis Sekarang!
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Quiz Playing Card -->
+      <div id="quizPlayingCard" class="quiz-card" style="display:none;">
+        <div class="quiz-header">
+          <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+            <div class="quiz-progress-text">
+              Soal <span id="quizCurrentNum">1</span> dari <span id="quizTotalNum">10</span>
+            </div>
+            <div class="quiz-participant-pill">
+              <span id="quizHeaderAvatar">🥕</span>
+              <strong id="quizHeaderName">Sobat Sayur</strong>
+              <span id="quizHeaderClass" style="opacity:0.85; font-size:0.85rem;">(Kelas 2)</span>
+              <button onclick="editQuizParticipant()" class="quiz-edit-name-btn" title="Ganti Nama Peserta">✏️ Ubah</button>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <button class="tts-btn" style="background:rgba(255,255,255,0.25); color:white; border-color:white;" onclick="speakText(document.getElementById('quizQuestionText').textContent)">
+              🔊 Baca Soal
+            </button>
+          </div>
+        </div>
+
+        <div class="quiz-body">
+          <div style="margin-bottom:0.75rem; text-align:center;">
+            <span id="quizCategoryBadge" class="quiz-badge-cat">Variasi: Semua Kategori</span>
+          </div>
+
+          <div class="quiz-question-box">
+            <h3 id="quizQuestionText" class="quiz-question-text">
+              Loading pertanyaan...
+            </h3>
+            <div id="quizIllustration" class="quiz-illustration"></div>
+          </div>
+
+          <div id="quizOptionsContainer" class="quiz-options-grid">
+            <!-- Options dynamically loaded via JS -->
+          </div>
+
+          <div id="quizExplanationBox" class="quiz-explanation-box"></div>
+        </div>
+      </div>
+
+      <!-- 3. Quiz Result & Printable Certificate Card -->
+      <div id="quizResultCard" class="result-card">
+        <img src="assets/badge_juara_pasar_1792770617493.jpg" 
+             alt="Medali Juara" 
+             class="trophy-badge-img"
+             onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'45\' fill=\'%23fde047\' stroke=\'%23ca8a04\' stroke-width=\'5\'/><text x=\'50\' y=\'65\' font-size=\'45\' text-anchor=\'middle\'>🏆</text></svg>';">
+
+        <h3 style="font-family:var(--font-heading); font-size:2rem; color:#15803d; margin-bottom:0.25rem;">
+          Selamat! Kamu Telah Menyelesaikan Kuis!
+        </h3>
+        
+        <div class="participant-result-badge">
+          Peserta: <strong id="resultStudentNameDisplay">Sobat Sayur</strong> | <span id="resultStudentClassDisplay">Kelas 2</span>
+        </div>
+
+        <p style="font-size:1.1rem; color:var(--text-muted); margin-bottom:1.5rem;">
+          Hebat sekali, kamu telah berjuang menyelesaikan semua tantangan berhitung di Pasar Sayur Mini!
+        </p>
+
+        <div class="score-display-box">
+          <span id="quizFinalScore">100</span> <span style="font-size:2rem; color:var(--text-muted);">/ 100</span>
+        </div>
+        <div id="quizStarsDisplay" class="score-stars">⭐⭐⭐⭐⭐</div>
+        <h4 id="quizTitleDisplay" style="font-family:var(--font-heading); font-size:1.4rem; color:#ea580c; margin-bottom:2rem;">
+          Juara Bintang Pasar Sayur 🥕👑
+        </h4>
+
+        <!-- Certificate Frame (Printable) -->
+        <div class="certificate-frame" id="printableCertificate">
+          <div class="cert-header">
+            <span style="font-size:2.5rem;">🏆</span>
+            <h2 style="font-size:1.8rem; text-transform:uppercase; letter-spacing:1px; margin-top:0.3rem;">
+              SERTIFIKAT PENGHARGAAN
+            </h2>
+            <div style="font-size:0.95rem; font-weight:700; color:#92400e;">PASAR SAYUR MINI - MATEMATIKA KELAS 2 SD</div>
+          </div>
+
+          <p style="font-size:1rem; color:#78350f;">Diberikan dengan penuh rasa bangga kepada:</p>
+          <div id="certStudentName" class="cert-student-name">Sobat Sayur</div>
+          <div id="certStudentMeta" style="font-size:1.05rem; font-weight:700; color:#92400e; margin-bottom:0.75rem;">Kelas 2-A • SD Ceria</div>
+
+          <p class="cert-desc" id="certDescription">
+            Telah berhasil dan cakap menguasai materi <strong>Penjumlahan Bilangan sampai 100 dengan Teknik Menyimpan</strong>
+            melalui media simulasi interaktif Pasar Sayur Mini dengan perolehan nilai: <strong><span id="certScore">100/100</span></strong>.
+          </p>
+
+          <div class="cert-signatures">
+            <div class="signature-box">
+              <div>Tanggal Penerbitan:</div>
+              <div id="certDate" style="font-weight:700; margin-top:0.2rem;">24 Oktober 2026</div>
+              <div class="signature-line">Cap Resmi Pasar Sayur</div>
+            </div>
+
+            <div style="display:flex; align-items:center; justify-content:center;">
+              <span style="font-size:3rem;">🌟</span>
+            </div>
+
+            <div class="signature-box">
+              <div>Guru Pembimbing:</div>
+              <div style="font-weight:700; margin-top:0.2rem;">Pak Tani Budi & Tim Matematika</div>
+              <div class="signature-line">Tanda Tangan Digital</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; margin-top:1.5rem;">
+          <button class="btn-primary" onclick="printCertificate()">🖨️ Cetak / Simpan Sertifikat (PDF)</button>
+          <button class="btn-secondary" onclick="initQuiz()">🔄 Ulangi Kuis</button>
+          <button class="btn-secondary" onclick="switchPage('game')">🎮 Main Game Lagi</button>
+        </div>
+      </div>
+    </section>
+
+  <!-- ================= POP-UP MODAL FEEDBACK KUIS JUARA ================= -->
+  <div id="quizFeedbackModal" class="quiz-modal-overlay" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="quizModalTitle">
+    <div class="quiz-modal-card correct" id="quizModalCard">
+      <!-- Mascot Badge -->
+      <div class="quiz-modal-badge" id="quizModalBadge">
+        <span id="quizModalEmoji" class="quiz-modal-emoji">🎉</span>
+      </div>
+
+      <!-- Title & Subtitle -->
+      <h3 id="quizModalTitle" class="quiz-modal-title">Hore! Jawabanmu Benar! 🌟</h3>
+      <p id="quizModalSubtitle" class="quiz-modal-subtitle">Kamu hebat dan sangat teliti!</p>
+
+      <!-- Reward Pill -->
+      <div id="quizModalRewardPill" class="quiz-modal-reward">
+        <span>🪙</span> +10 Koin Emas Ditambahkan!
+      </div>
+
+      <!-- Highlight Answer -->
+      <div id="quizModalAnswerHighlight" class="quiz-modal-answer-highlight">
+        <span id="quizModalAnswerLabel" class="quiz-modal-highlight-label">Jawaban Tepat:</span>
+        <span id="quizModalAnswerVal" class="quiz-modal-highlight-val">42 sayur</span>
+      </div>
+
+      <!-- Explanation Box -->
+      <div class="quiz-modal-explanation">
+        <div class="quiz-modal-explanation-header">
+          <span>💡 Penjelasan Konsep Simpanan:</span>
+          <button type="button" class="tts-btn" id="btnModalSpeak" onclick="speakModalExplanation()">
+            🔊 Dengarkan
+          </button>
+        </div>
+        <p id="quizModalExplanationText" class="quiz-modal-explanation-text">
+          Satuan: 7 + 5 = 12 (tulis 2, simpan 1). Puluhan: 1 + 2 + 1 = 4. Jadi ada 42 sayur!
+        </p>
+      </div>
+
+      <!-- Action Button -->
+      <div class="quiz-modal-actions">
+        <button id="btnModalNextQuestion" class="btn-primary quiz-modal-next-btn" onclick="closeQuizModalAndNext()">
+          Lanjut ke Soal Berikutnya ➡️
+        </button>
+      </div>
+    </div>
+  </div>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">🥕 Pasar Sayur Mini</div>
+      <p class="footer-text">
+        Media Pembelajaran Matematika Kelas 2 Sekolah Dasar (Fase A - Kurikulum Merdeka)
+        <br>Materi: Penjumlahan Bilangan Cacah sampai 100 dengan Teknik Menyimpan
+      </p>
+      <div class="footer-pills">
+        <span class="footer-pill">🌱 Berbasis Gamifikasi</span>
+        <span class="footer-pill">🔊 Audio Synthesizer & TTS</span>
+        <span class="footer-pill">🧺 Visual Manipulatif Sayur</span>
+        <span class="footer-pill">🏆 Sertifikat Prestasi Siswa</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
